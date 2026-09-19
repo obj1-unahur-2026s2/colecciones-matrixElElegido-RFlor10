@@ -54,14 +54,34 @@ object nave{
     method laMayorVitalidad(){
         return pasajeros.max({unPasajero => unPasajero.vitalidad()} ).vitalidad()
     }
-    
-    method vitalidadEquilibrada(){}
+    method elPasajeroConMenosVitalidad(){
+        return pasajeros.min({unPasajero => unPasajero.vitalidad()} )
+    }
 
-    method elegidoEsta(){}
+    method laMenorVitalidad(){
+        return pasajeros.min({unPasajero => unPasajero.vitalidad()} ).vitalidad()
+    }
+    
+    method vitalidadEstaEquilibrada(){
+        //max <= min*2
+        return self.laMayorVitalidad().vitalidad() <= self.laMenorVitalidad().vitalidad() *2
+    }
+
+    method elElegidoEsta(){
+        //lista que contenga a el elegido
+        return pasajeros.any({unPasajero => unPasajero.esElegido()})
+    }
 
     method chocarNave(){
-        return pasajeros.clean()
+        pasajeros.forEach({p=>p.saltar()}) //para cada p salta y pasa al siguiente p y asi
+        pasajeros.clean()
     }
-    method acelerarNave(){}
+    method acelerarNave(){
+        pasajeros.filter({p=> not p.esElegido()}).forEach({p=>p.saltar()}) 
+            //[neo, trinity, morfeo] mi primer lista    
+            //[trinity, morfe] lista ya filtada con los quq no son elegidos
+        //filtro, me quedo con la lista de los que no son elegidos y luego ejecuta para cada p salta y pasa al siguiente p y asi
+
+    }
 
 }
