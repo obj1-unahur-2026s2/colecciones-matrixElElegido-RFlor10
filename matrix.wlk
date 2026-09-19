@@ -16,13 +16,10 @@ object morfeo{
     method vitalidad() = vitalidad
     method esElegido() = false
     method saltar() {
-        estaDescansado = !estaDescansado
+        estaDescansado = not estaDescansado
         vitalidad =(vitalidad - 1).max(0)
     }
 }
-
-
-
 
 
 object trinity{
